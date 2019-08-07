@@ -26,7 +26,9 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:10001/eureka/
   instance:
+    #prefer-ip-address: true
     hostname: eureka-client
+
 
 info: # 在eureka中可以点击info链接，显示有值。链接后的内容就是在这里配置的
   app.name: java3y-microservicecloud
