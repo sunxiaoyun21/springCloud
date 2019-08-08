@@ -25,9 +25,9 @@ eureka:
     register-with-eureka: true
     serviceUrl:
       defaultZone: http://localhost:10001/eureka/
-  instance:
+  #instance:
     #prefer-ip-address: true
-    hostname: eureka-client
+    #hostname: eureka-client
 
 
 info: # 在eureka中可以点击info链接，显示有值。链接后的内容就是在这里配置的

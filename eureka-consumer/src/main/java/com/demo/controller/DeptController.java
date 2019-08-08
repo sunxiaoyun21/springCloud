@@ -27,6 +27,7 @@ public class DeptController {
         ServiceInstance serviceInstance = loadBalancerClient.choose("eureka-client");
         String url = "http://"+serviceInstance.getHost()+":"+serviceInstance.getPort()+"/dept/list";
         System.out.println(url);
-        return restTemplate.getForObject(url,String.class);
+        String ss="http://eureka-client:8686/dept/list";
+        return restTemplate.getForObject(ss,String.class);
     }
 }
