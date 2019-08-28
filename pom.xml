@@ -12,8 +12,8 @@
     <module>eureka-server</module>
     <module>eureka-client</module>
     <module>eureka-consumer</module>
-    <module>eureka-consumer</module>
     <module>eureka-consumer-feign</module>
+    <module>eureka-consumer-ribbon</module>
   </modules>
 
   <properties>
@@ -30,7 +30,7 @@
       <dependency>
         <groupId>org.springframework.cloud</groupId>
         <artifactId>spring-cloud-dependencies</artifactId>
-        <version>Greenwich.SR1</version>
+        <version>Dalston.SR1</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>

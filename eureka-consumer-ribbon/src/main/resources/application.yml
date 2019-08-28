@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: eureka-consumer-ribbon
+
+
+server:
+  port: 8585
+
+
+eureka:
+  client:
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: http://localhost:10001/eureka/
