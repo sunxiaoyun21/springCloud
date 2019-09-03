@@ -22,7 +22,8 @@ public class DcController {
     DeptService deptService;
 
     @GetMapping("/list")
-    public List<Dept> findDept() {
+    public List<Dept> findDept() throws InterruptedException {
+        //Thread.sleep(5000);
         List<Dept> depts = deptService.findAll();
         System.out.println(depts);
         return depts;

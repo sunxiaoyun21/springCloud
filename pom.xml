@@ -14,6 +14,7 @@
     <module>eureka-consumer</module>
     <module>eureka-consumer-feign</module>
     <module>eureka-consumer-ribbon</module>
+    <module>eureka-consumer-ribbon-hystrix</module>
   </modules>
 
   <properties>

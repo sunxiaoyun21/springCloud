@@ -14,7 +14,7 @@ import org.springframework.web.client.RestTemplate;
  **/
 @EnableEurekaClient
 @SpringBootApplication
-public class RibbonApplication {
+public class  RibbonApplication {
 
     @Bean
     @LoadBalanced
