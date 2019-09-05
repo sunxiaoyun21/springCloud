@@ -35,3 +35,8 @@ info: # 在eureka中可以点击info链接，显示有值。链接后的内容�
   company.name: www.java3y.com
   build.artifactId: $project.artifactId$
   build.version: $project.version$
+
+
+sms:
+  accessKeyId: LTAI4Ff7n5i76MNMW7w3QNgu
+  accessSecret: EC8YR9jVi1WE4rxVigvsev37bzwsZr
