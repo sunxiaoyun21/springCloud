@@ -10,17 +10,18 @@ import java.util.Date;
 /**
  * @author 孙小云
  * @version 1.0
- * @date 2019/9/3 16:36
+ * @date 2019/9/18 10:07
  **/
-@NoArgsConstructor
 @Data
+@NoArgsConstructor
 @Accessors(chain = true)
-@Table(name = "user")
-public class User {
+@Table(name = "channel_resume_template")
+public class ChannelResumeTemplate {
 
-    private Integer id;
-    private String name;
-    private String  gender;
-    private String mobile;
-    private Date creation;
+
+    private int id;
+    private int channelId;
+    private int userId;
+    private Date creationTime;
+    private Date modifyTime;
 }

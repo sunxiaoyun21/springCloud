@@ -20,6 +20,6 @@ public class DeptServiceImpl implements DeptService {
     DeptMapper deptMapper;
     @Override
     public List<Dept> findAll() {
-        return deptMapper.findAll();
+        return deptMapper.selectAll();
     }
 }

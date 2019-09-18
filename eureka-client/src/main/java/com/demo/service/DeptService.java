@@ -1,6 +1,7 @@
 package com.demo.service;
 
 import com.demo.entity.Dept;
+import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
 
