@@ -3,7 +3,7 @@ server:
   port: 8686
 
 mybatis:
-  #config-location: classpath*:mapper/*.xml        # mybatis配置文件所在路径
+  mapper-locations: classpath*:mapper/*.xml
   type-aliases-package: com.demo.entity    # 所有Entity别名类所在包
 
 spring:

@@ -28,4 +28,6 @@ public interface ExcelMapper{
         "      and cv_job_hunting.comprehensive ::jsonb@> '{\"workNature\":[\"${type}\"]}'\n" +
         "   ;")
     List<String> findJobHuntingByType(@Param("type") String type);
+
+    int findPostNum(@Param("category") String category,@Param("type") int type,@Param("all") Boolean all);
 }

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.mapper.ExcelMapper">
+
+  <select id="findPostNum" resultType="int">
+    select count(*)
+    from post
+    where basic_info ->> 'category' = #{category}
+    <if test=" all==true ">
+      and state != 2
+    </if>
+    <if test=" all==false ">
+      and state =0
+    </if>
+    and is_delete = 0
+    <if test=" type !=null and type==0 ">
+      and (basic_info ->> 'type')::int2 = 0
+    </if>
+    <if test=" type !=null and type==1 ">
+      and (basic_info ->> 'type')::int2 = 1
+      and (basic_info->>'practiceLabel')::int2!=1
+    </if>
+    <if test=" type !=null and type==2 ">
+      and (basic_info ->> 'type')::int2 = 1
+      and (basic_info->>'practiceLabel')::int2=1
+    </if>
+  </select>
+
+</mapper>

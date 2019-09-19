@@ -29,6 +29,15 @@ public class ExcelServiceImpl implements ExcelService {
 
     @Override
     public List<String>  findJobHuntingByType(String type) {
+        int jobType;
+        if("兼职".equals(type)){
+            jobType=0;
+        }else if ("实习".equals(type)){
+            jobType=2;
+        }else {
+            jobType=1;
+        }
+
         List<String> jobhuntings =excelMapper.findJobHuntingByType(type);
         Map<String,Integer> data = new HashMap<>(100);
         List<String> jobs = new LinkedList<>();
@@ -50,13 +59,17 @@ public class ExcelServiceImpl implements ExcelService {
         });
         List<DataJobHunting> dataJobHuntings = new ArrayList<>(data.size());
         data.forEach((title,num)->{
+            int allnum = excelMapper.findPostNum(title,jobType,true);
+            int nums = excelMapper.findPostNum(title,jobType,false);
             DataJobHunting dataJobHunting = new DataJobHunting();
             dataJobHunting.setTitle(title);
             dataJobHunting.setNum(num);
+            dataJobHunting.setPostAllNum(allnum);
+            dataJobHunting.setPostNum(nums);
             dataJobHuntings.add(dataJobHunting);
         });
-       List titles = Arrays.asList("标题","数量");
-       List propertys = Arrays.asList("title","num");
+       List titles = Arrays.asList("标题","数量","全部","上架");
+       List propertys = Arrays.asList("title","num","postAllNum","postNum");
         try {
             Collections.sort(dataJobHuntings, new Comparator<DataJobHunting>() {
                 public int compare(DataJobHunting u1, DataJobHunting u2) {

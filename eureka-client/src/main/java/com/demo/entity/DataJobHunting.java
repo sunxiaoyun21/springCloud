@@ -12,4 +12,6 @@ public class DataJobHunting {
 
     private String title;
     private Integer num;
+    private Integer postNum;
+    private Integer postAllNum;
 }
