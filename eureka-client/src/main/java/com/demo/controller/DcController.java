@@ -2,6 +2,7 @@ package com.demo.controller;
 
 import com.demo.entity.Dept;
 import com.demo.service.DeptService;
+import com.demo.utils.JedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,4 +29,15 @@ public class DcController {
         System.out.println(depts);
         return depts;
     }
+
+    @GetMapping("/find")
+    public String insertName(){
+        JedisUtil.set("test","test");
+        String ss = JedisUtil.get("test");
+        return ss;
+
+    }
+
+
+
 }

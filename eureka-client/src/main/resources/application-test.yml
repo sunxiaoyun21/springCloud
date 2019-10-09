@@ -40,3 +40,12 @@ info: # 在eureka中可以点击info链接，显示有值。链接后的内容�
 sms:
   accessKeyId: LTAI4Ff7n5i76MNMW7w3QNgu
   accessSecret: EC8YR9jVi1WE4rxVigvsev37bzwsZr
+logging:
+  level:
+    root: info
+jedis:
+  host: localhost
+  password: 123456
+  max-total: 2000
+  port: 6379
+  enable: true
