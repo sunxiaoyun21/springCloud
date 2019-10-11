@@ -1,5 +1,6 @@
 package com.demo.utils;
 
+import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -9,6 +10,7 @@ import redis.clients.jedis.JedisPool;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * @author 孙小云
@@ -87,11 +89,21 @@ public class JedisUtil {
         }
     }
 
-  public  static Long setList(String key,List list){
+  public  static void   setList(String key, List list){
       log.debug("{},{}",key,list);
         try(Jedis jedis = jedisPool.getResource()){
-            return  jedis.lpush(key, String.valueOf(list));
+            list.forEach(obj->{ String resultJson = JSONObject.toJSONString(obj);
+            jedis.lpush(key,resultJson);
+            });
+
         }
+
+  }
+
+  public static Long getSize(String key){
+      try(Jedis jedis = jedisPool.getResource()){
+          return  jedis.llen(key);
+      }
   }
 
   public static  List getList(String key,int begin,int end){
@@ -99,6 +111,16 @@ public class JedisUtil {
         try(Jedis jedis = jedisPool.getResource()){
             return  jedis.lrange(key, begin,end);
         }
+  }
+
+    /**
+     * 删除指定的value值
+     */
+  public static void delByValue(String key,String value){
+      log.debug("{},{}",key,key,value);
+      try(Jedis jedis = jedisPool.getResource()){
+         jedis.lrem(key,0,value);
+      }
   }
 
     /**

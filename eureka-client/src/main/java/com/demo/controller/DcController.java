@@ -1,5 +1,6 @@
 package com.demo.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.demo.entity.Account;
 import com.demo.entity.Dept;
 import com.demo.service.DeptService;
@@ -13,6 +14,7 @@ import redis.clients.jedis.Jedis;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author 孙小云
@@ -50,19 +52,40 @@ public class DcController {
    }
 
 
+    @GetMapping("/addAccount")
+    public String addAccount(){
+        Account account = new Account();
+        account.setAge(5);
+        account.setName("小仙女");
+        List list =new ArrayList();
+        list.add(account);
+        JedisUtil.setList("account",list);
+        return "ok";
+    }
+
    @GetMapping("/findAccount")
    public List getAccount(){
-        Account account = new Account();
-        account.setName("zhang");
-        account.setAge(3);
-       Account account1 = new Account();
-       account1.setName("zhang");
-       account1.setAge(3);
-        List<Account> accounts = new ArrayList<>();
-        accounts.add(account);
-        accounts.add(account1);
+        Long size = JedisUtil.getSize("account");
+        int len = Math.toIntExact(size)-1;
+        List<String>  list = JedisUtil.getList("account",0,len);
+       List<Account> accounts = new ArrayList<>();
+        list.forEach(obj->{
+            Account account = JSON.parseObject(obj,Account.class);
+            accounts.add(account);
+        });
+    return  accounts;
+   }
 
-        JedisUtil.setList("account",accounts);
-        return JedisUtil.getList("account",0,accounts.size()-1);
+    @GetMapping("/delByValue")
+   public  String  delByValue(){
+      String value = "{\"age\":2,\"name\":\"zhangs\"}" ;
+      JedisUtil.delByValue("account",value);
+      return "ok";
+   }
+
+   @GetMapping("/del")
+   public  String del(String key){
+       JedisUtil.del("account");
+       return "ok";
    }
 }
