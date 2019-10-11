@@ -89,6 +89,12 @@ public class JedisUtil {
         }
     }
 
+    public  static String lSet(String key,Long index,String value){
+        log.debug("{},{},{}",key,index,value);
+        try(Jedis jedis = jedisPool.getResource()){
+           return jedis.lset(key,index,value);
+        }
+    }
   public  static void   setList(String key, List list){
       log.debug("{},{}",key,list);
         try(Jedis jedis = jedisPool.getResource()){

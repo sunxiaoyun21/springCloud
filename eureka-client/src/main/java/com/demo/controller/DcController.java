@@ -88,4 +88,11 @@ public class DcController {
        JedisUtil.del("account");
        return "ok";
    }
+
+    @GetMapping("/update")
+   public String update(){
+        String value = "{\"age\":2,\"name\":\"zhangs\"}" ;
+        JedisUtil.lSet("account",0L,value);
+        return "ok";
+   }
 }
