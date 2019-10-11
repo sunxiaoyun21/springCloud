@@ -7,6 +7,9 @@ import org.springframework.stereotype.Component;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author 孙小云
  * @version 1.0
@@ -84,6 +87,18 @@ public class JedisUtil {
         }
     }
 
+  public  static Long setList(String key,List list){
+        try(Jedis jedis = jedisPool.getResource()){
+            return  jedis.lpush(key, String.valueOf(list));
+        }
+  }
+
+  public static  List getList(String key,int begin,int end){
+        try(Jedis jedis = jedisPool.getResource()){
+            return  jedis.lrange(key, begin,end);
+        }
+  }
+
     /**
      * 根据key读取
      * @param key
@@ -105,4 +120,6 @@ public class JedisUtil {
             return  jedis.del(key);
         }
     }
+
+
 }

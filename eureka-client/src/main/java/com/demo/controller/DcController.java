@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import redis.clients.jedis.Jedis;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -38,6 +41,12 @@ public class DcController {
 
     }
 
+   @GetMapping("/findList")
+   public  List getList(){
+      List list  = Arrays.asList("q","e","f","g","o");
+       JedisUtil.setList("list",list);
+       return JedisUtil.getList("list",0,list.size()-1);
+   }
 
 
 }
