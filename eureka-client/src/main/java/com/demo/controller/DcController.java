@@ -1,5 +1,6 @@
 package com.demo.controller;
 
+import com.demo.entity.Account;
 import com.demo.entity.Dept;
 import com.demo.service.DeptService;
 import com.demo.utils.JedisUtil;
@@ -49,4 +50,19 @@ public class DcController {
    }
 
 
+   @GetMapping("/findAccount")
+   public List getAccount(){
+        Account account = new Account();
+        account.setName("zhang");
+        account.setAge(3);
+       Account account1 = new Account();
+       account1.setName("zhang");
+       account1.setAge(3);
+        List<Account> accounts = new ArrayList<>();
+        accounts.add(account);
+        accounts.add(account1);
+
+        JedisUtil.setList("account",accounts);
+        return JedisUtil.getList("account",0,accounts.size()-1);
+   }
 }

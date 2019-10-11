@@ -88,12 +88,14 @@ public class JedisUtil {
     }
 
   public  static Long setList(String key,List list){
+      log.debug("{},{}",key,list);
         try(Jedis jedis = jedisPool.getResource()){
             return  jedis.lpush(key, String.valueOf(list));
         }
   }
 
   public static  List getList(String key,int begin,int end){
+      log.debug("{},{},{}",key,begin,end);
         try(Jedis jedis = jedisPool.getResource()){
             return  jedis.lrange(key, begin,end);
         }
