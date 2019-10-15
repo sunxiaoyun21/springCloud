@@ -120,6 +120,18 @@ public class JedisUtil {
   }
 
     /**
+     * 判断key值是否存在
+     * @param key
+     * @return
+     */
+  public static boolean isExit(String key){
+      log.debug("{}",key);
+      try (Jedis jedis =jedisPool.getResource()){
+          return jedis.exists(key);
+      }
+  }
+
+    /**
      * 删除指定的value值
      */
   public static void delByValue(String key,String value){

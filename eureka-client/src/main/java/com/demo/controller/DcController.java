@@ -3,6 +3,7 @@ package com.demo.controller;
 import com.alibaba.fastjson.JSON;
 import com.demo.entity.Account;
 import com.demo.entity.Dept;
+import com.demo.others.Ajax;
 import com.demo.service.DeptService;
 import com.demo.utils.JedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,18 +30,18 @@ public class DcController {
     DeptService deptService;
 
     @GetMapping("/list")
-    public List<Dept> findDept() throws InterruptedException {
+    public Ajax findDept() throws InterruptedException {
         //Thread.sleep(5000);
         List<Dept> depts = deptService.findAll();
         System.out.println(depts);
-        return depts;
+        return Ajax.ok(depts);
     }
 
     @GetMapping("/find")
-    public String insertName(){
+    public Ajax insertName(){
         JedisUtil.set("test","test");
         String ss = JedisUtil.get("test");
-        return ss;
+        return Ajax.ok(ss);
 
     }
 
@@ -53,18 +54,18 @@ public class DcController {
 
 
     @GetMapping("/addAccount")
-    public String addAccount(){
+    public Ajax addAccount(){
         Account account = new Account();
         account.setAge(5);
         account.setName("小仙女");
         List list =new ArrayList();
         list.add(account);
         JedisUtil.setList("account",list);
-        return "ok";
+        return Ajax.ok();
     }
 
    @GetMapping("/findAccount")
-   public List getAccount(){
+   public Ajax getAccount(){
         Long size = JedisUtil.getSize("account");
         int len = Math.toIntExact(size)-1;
         List<String>  list = JedisUtil.getList("account",0,len);
@@ -73,26 +74,26 @@ public class DcController {
             Account account = JSON.parseObject(obj,Account.class);
             accounts.add(account);
         });
-    return  accounts;
+    return  Ajax.ok(accounts);
    }
 
     @GetMapping("/delByValue")
-   public  String  delByValue(){
+   public  Ajax  delByValue(){
       String value = "{\"age\":2,\"name\":\"zhangs\"}" ;
       JedisUtil.delByValue("account",value);
-      return "ok";
+      return Ajax.ok();
    }
 
    @GetMapping("/del")
-   public  String del(String key){
+   public  Ajax del(String key){
        JedisUtil.del("account");
-       return "ok";
+       return Ajax.ok();
    }
 
     @GetMapping("/update")
-   public String update(){
+   public Ajax update(){
         String value = "{\"age\":2,\"name\":\"zhangs\"}" ;
         JedisUtil.lSet("account",0L,value);
-        return "ok";
+        return Ajax.ok();
    }
 }
