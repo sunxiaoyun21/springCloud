@@ -1,11 +1,13 @@
 package com.demo.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.demo.entity.Account;
 import com.demo.entity.Dept;
 import com.demo.others.Ajax;
 import com.demo.service.DeptService;
 import com.demo.utils.JedisUtil;
+import jdk.nashorn.internal.runtime.regexp.joni.Regex;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +18,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.sun.tools.classfile.Attribute.Code;
 
 /**
  * @author 孙小云
@@ -96,4 +100,6 @@ public class DcController {
         JedisUtil.lSet("account",0L,value);
         return Ajax.ok();
    }
+
+   
 }

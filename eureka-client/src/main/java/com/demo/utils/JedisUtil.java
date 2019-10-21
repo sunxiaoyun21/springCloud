@@ -120,6 +120,18 @@ public class JedisUtil {
   }
 
     /**
+     * 设置key过期时间
+     * @param key
+     * @param seconds
+     * @return
+     */
+    public static  Long expire( String key, int seconds) {
+        try(Jedis jedis = jedisPool.getResource()){
+            return  jedis.expire(key,seconds);
+        }
+
+    }
+    /**
      * 判断key值是否存在
      * @param key
      * @return
