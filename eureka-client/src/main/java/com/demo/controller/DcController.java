@@ -101,5 +101,14 @@ public class DcController {
         return Ajax.ok();
    }
 
-   
+    public static void main(String[] args) {
+        List a =  new ArrayList();
+        a.add(1);
+        a.add(2);
+        List b =  new ArrayList();
+        a.add(5);
+        a.add(8);
+        a.addAll(b);
+        System.out.println(a);
+    }
 }
