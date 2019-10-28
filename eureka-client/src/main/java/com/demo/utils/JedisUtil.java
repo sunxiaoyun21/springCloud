@@ -10,6 +10,7 @@ import redis.clients.jedis.JedisPool;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -41,47 +42,49 @@ public class JedisUtil {
         return jedisPool.getResource();
     }
 
+    //value:string
     public static String set(String key,String value,String nxxx,String expx,long timeout ){
       log.debug("{},{},{},{},{}",key,value,nxxx,expx,timeout);
        try(Jedis jedis = jedisPool.getResource()) {
            return  jedis.set(key,value,nxxx,expx,timeout);
        }
     }
-
+    //value:string
     public static String setNx(String key,String value,String expx,long timeout){
         log.debug("{},{},{},{}",key,value,expx,timeout);
         try(Jedis jedis = jedisPool.getResource()) {
             return  jedis.set(key,value,"nx",expx,timeout);
         }
     }
-
+    //value:string
     public static String setXx(String key,String value,String expx,long timeout){
         log.debug("{},{},{},{}",key,value,expx,timeout);
         try(Jedis jedis = jedisPool.getResource()) {
             return  jedis.set(key,value,"xx",expx,timeout);
         }
     }
-
+    //value:string
     public static String set(String key,String value){
         log.debug("{},{}",key,value);
         try(Jedis jedis = jedisPool.getResource()) {
             return  jedis.set(key,value);
         }
     }
-
+    //value:string
     public static String set(String key,String value,String expx,long timeout){
         log.debug("{},{},{},{}",key,value,expx,timeout);
         try(Jedis jedis = jedisPool.getResource()) {
             return  jedis.set(key,value,expx,timeout);
         }
     }
+    //value:string
     public static String setNx(String key,String value){
         log.debug("{},{}",key,value);
         try(Jedis jedis = jedisPool.getResource()) {
             return  jedis.set(key,value,"nx");
         }
     }
-
+    //value:string
     public static String setXx(String key,String value){
         log.debug("{},{}",key,value);
         try(Jedis jedis = jedisPool.getResource()) {
@@ -89,12 +92,14 @@ public class JedisUtil {
         }
     }
 
+    //修改数据
     public  static String lSet(String key,Long index,String value){
         log.debug("{},{},{}",key,index,value);
         try(Jedis jedis = jedisPool.getResource()){
            return jedis.lset(key,index,value);
         }
     }
+    //value:list
   public  static void   setList(String key, List list){
       log.debug("{},{}",key,list);
         try(Jedis jedis = jedisPool.getResource()){
@@ -106,6 +111,28 @@ public class JedisUtil {
 
   }
 
+    //获取zset的分数值
+    public static Double getScore(String key, String value) {
+        try(Jedis jedis = jedisPool.getResource()){
+            return jedis.zscore(key,value);
+        }
+
+    }
+
+    //value:zset
+    public static  void  zadd(String key,Long id,String value){
+        try(Jedis jedis = jedisPool.getResource()){
+            jedis.zadd(key,id,value);
+        }
+    }
+
+
+    //删除zset的值
+    public static  void zremove(String key,String value){
+        try(Jedis jedis = jedisPool.getResource()){
+            jedis.zrem(key,value);
+        }
+    }
   public static Long getSize(String key){
       try(Jedis jedis = jedisPool.getResource()){
           return  jedis.llen(key);
@@ -118,6 +145,8 @@ public class JedisUtil {
             return  jedis.lrange(key, begin,end);
         }
   }
+
+
 
     /**
      * 设置key过期时间
@@ -163,6 +192,31 @@ public class JedisUtil {
             return  jedis.get(key);
         }
     }
+
+
+
+    //获取zset数据 正序
+    public static Set<String> zrange(String key, long start, long stop) {
+        try(Jedis jedis = jedisPool.getResource()) {
+            return jedis.zrange(key,start,stop);
+        }
+    }
+
+    //获取zset数据 倒叙
+    public static Set<String> zrevRange(String key, long start, long stop) {
+        try(Jedis jedis = jedisPool.getResource()) {
+            return jedis.zrevrange(key,start,stop);
+        }
+    }
+
+    //获取zset数据 数量
+    public  static  Long zcard(String key){
+        try(Jedis jedis = jedisPool.getResource()) {
+            return  jedis.zcard(key);
+        }
+    }
+
+
 
     /***
      * 根据key删除
