@@ -94,6 +94,10 @@ public class IdGenerator {
         System.out.println((1 << 10) );
         System.out.println((10 >>3) );
 
+        Long ss= 373842649578213376L;
+        System.out.println(ss.toString());
+        JedisUtil.zadd("test",1L,ss.toString());
+
     }
 
 }
