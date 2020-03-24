@@ -1,6 +1,7 @@
 package com.demo.service;
 
 import com.demo.entity.Log;
+import com.demo.entity.SysLog;
 
 /**
  * @author sunxiaoyun
@@ -9,4 +10,6 @@ import com.demo.entity.Log;
 public interface SystemLogService {
 
     boolean saveLog(Log log);
+
+    boolean saveSysLog(SysLog sysLog);
 }

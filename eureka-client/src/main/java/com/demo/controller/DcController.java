@@ -4,14 +4,13 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.demo.entity.Account;
 import com.demo.entity.Dept;
+import com.demo.log.SystemControllerLog;
 import com.demo.others.Ajax;
 import com.demo.service.DeptService;
 import com.demo.utils.JedisUtil;
 import jdk.nashorn.internal.runtime.regexp.joni.Regex;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import redis.clients.jedis.Jedis;
 
 import java.util.ArrayList;
@@ -27,13 +26,13 @@ import static com.sun.tools.classfile.Attribute.Code;
  * @date 2019/8/5 15:10
  **/
 @RestController
-@RequestMapping("/dept")
+@RequestMapping("/dept/")
 public class DcController {
 
     @Autowired
     DeptService deptService;
 
-    @GetMapping("/list")
+    @GetMapping("list")
     public Ajax findDept() throws InterruptedException {
         //Thread.sleep(5000);
         List<Dept> depts = deptService.findAll();
@@ -41,7 +40,13 @@ public class DcController {
         return Ajax.ok(depts);
     }
 
-    @GetMapping("/find")
+    @PutMapping("update")
+    @SystemControllerLog(module="部门模块",methods="名称修改",serviceClass="DeptService",queryMethod="queryDept",parameterType="Long",parameterKey="deptno",tableName ="dept" )
+    public Ajax update(@RequestBody Dept dept){
+        return Ajax.ok(deptService.update(dept));
+    }
+
+    @GetMapping("find")
     public Ajax insertName(){
         JedisUtil.set("test","test");
         String ss = JedisUtil.get("test");
@@ -49,7 +54,7 @@ public class DcController {
 
     }
 
-   @GetMapping("/findList")
+   @GetMapping("findList")
    public  List getList(){
       List list  = Arrays.asList("q","e","f","g","o");
        JedisUtil.setList("list",list);
@@ -57,7 +62,7 @@ public class DcController {
    }
 
 
-    @GetMapping("/addAccount")
+    @GetMapping("addAccount")
     public Ajax addAccount(){
         Account account = new Account();
         account.setAge(5);
@@ -68,7 +73,7 @@ public class DcController {
         return Ajax.ok();
     }
 
-   @GetMapping("/findAccount")
+   @GetMapping("findAccount")
    public Ajax getAccount(){
         Long size = JedisUtil.getSize("account");
         int len = Math.toIntExact(size)-1;
@@ -81,25 +86,25 @@ public class DcController {
     return  Ajax.ok(accounts);
    }
 
-    @GetMapping("/delByValue")
+    @GetMapping("delByValue")
    public  Ajax  delByValue(){
       String value = "{\"age\":2,\"name\":\"zhangs\"}" ;
       JedisUtil.delByValue("account",value);
       return Ajax.ok();
    }
 
-   @GetMapping("/del")
+   @GetMapping("del")
    public  Ajax del(String key){
        JedisUtil.del("account");
        return Ajax.ok();
    }
 
-    @GetMapping("/update")
+  /*  @GetMapping("/update")
    public Ajax update(){
         String value = "{\"age\":2,\"name\":\"zhangs\"}" ;
         JedisUtil.lSet("account",0L,value);
         return Ajax.ok();
-   }
+   }*/
 
     public static void main(String[] args) {
         List a =  new ArrayList();

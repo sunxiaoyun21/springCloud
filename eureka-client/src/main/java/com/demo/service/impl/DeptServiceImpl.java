@@ -18,8 +18,19 @@ public class DeptServiceImpl implements DeptService {
 
     @Autowired
     DeptMapper deptMapper;
+
     @Override
     public List<Dept> findAll() {
         return deptMapper.selectAll();
+    }
+
+    @Override
+    public boolean update(Dept dept) {
+        return deptMapper.updateByPrimaryKeySelective(dept)>0;
+    }
+
+    @Override
+    public Dept queryDept(Long deptno) {
+        return deptMapper.selectByPrimaryKey(deptno);
     }
 }

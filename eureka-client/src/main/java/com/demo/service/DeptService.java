@@ -13,4 +13,8 @@ import java.util.List;
 public interface DeptService {
 
     List<Dept> findAll();
+
+    boolean update(Dept dept);
+
+    Dept queryDept(Long deptno);
 }
