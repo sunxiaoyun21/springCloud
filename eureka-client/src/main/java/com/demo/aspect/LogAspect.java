@@ -1,6 +1,7 @@
-package com.demo.log;
+package com.demo.aspect;
 
 import com.alibaba.fastjson.JSON;
+import com.demo.annotation.SystemLog;
 import com.demo.entity.Log;
 import com.demo.service.SystemLogService;
 import com.demo.utils.IdGenerator;
@@ -13,7 +14,6 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.NamedThreadLocal;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -47,14 +47,14 @@ public class LogAspect {
 
 
 
-    @Pointcut("@annotation(com.demo.log.SystemLog)")
+   /* @Pointcut("@annotation(com.demo.log.SystemLog)")
     public void pointCut(){
 
-    }
+    }*/
 
 
-    @Around("pointCut()")
-    public Object around(ProceedingJoinPoint point) {
+    @Around("@annotation(systemLog)")
+    public Object around(ProceedingJoinPoint point, SystemLog systemLog) {
         Object result =null;
         long beginTime = System.currentTimeMillis();
 

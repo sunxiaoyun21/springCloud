@@ -17,4 +17,5 @@ public interface DeptService {
     boolean update(Dept dept);
 
     Dept queryDept(Long deptno);
+
 }

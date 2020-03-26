@@ -1,4 +1,4 @@
-package com.demo.log;
+package com.demo.annotation;
 
 import java.lang.annotation.*;
 

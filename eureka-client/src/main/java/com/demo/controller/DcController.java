@@ -2,9 +2,10 @@ package com.demo.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.demo.annotation.SystemControllerLog;
+import com.demo.annotation.SystemGetLog;
 import com.demo.entity.Account;
 import com.demo.entity.Dept;
-import com.demo.log.SystemControllerLog;
 import com.demo.others.Ajax;
 import com.demo.service.DeptService;
 import com.demo.utils.JedisUtil;
@@ -40,8 +41,14 @@ public class DcController {
         return Ajax.ok(depts);
     }
 
+    @GetMapping("findById")
+    //@SystemGetLog(parameterKey = "deptno",objectName = "Dept")
+    public Ajax findById(Long id){
+        Dept dept = deptService.queryDept(id);
+        return Ajax.ok(dept);
+    }
+
     @PutMapping("update")
-    @SystemControllerLog(module="部门模块",methods="名称修改",serviceClass="DeptService",queryMethod="queryDept",parameterType="Long",parameterKey="deptno",tableName ="dept" )
     public Ajax update(@RequestBody Dept dept){
         return Ajax.ok(deptService.update(dept));
     }

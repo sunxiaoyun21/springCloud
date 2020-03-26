@@ -1,6 +1,6 @@
 package com.demo.controller;
 
-import com.demo.log.SystemLog;
+import com.demo.annotation.SystemLog;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
