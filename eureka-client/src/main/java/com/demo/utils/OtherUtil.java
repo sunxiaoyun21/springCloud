@@ -23,4 +23,7 @@ public class OtherUtil {
     }
 
 
+    public static void main(String[] args) {
+        System.out.println(random(6));
+    }
 }
