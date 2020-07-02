@@ -1,4 +1,4 @@
-package com.demo.service;
+package com.demo.service.impl;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,4 +26,6 @@ public class ConsumerService {
     private String fallBack(){
         return "系统服务异常,请重试!!!";
     }
+
+
 }

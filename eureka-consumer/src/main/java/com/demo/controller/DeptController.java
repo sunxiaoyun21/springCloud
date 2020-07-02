@@ -30,4 +30,8 @@ public class DeptController {
         String ss="http://eureka-client:8686/dept/list";
         return restTemplate.getForObject(ss,String.class);
     }
+
+
+
+
 }

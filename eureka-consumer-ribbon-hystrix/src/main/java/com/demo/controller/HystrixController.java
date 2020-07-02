@@ -1,10 +1,9 @@
 package com.demo.controller;
 
-import com.demo.service.ConsumerService;
+import com.demo.service.impl.ConsumerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 /**
  * @author 孙小云

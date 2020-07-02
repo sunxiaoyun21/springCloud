@@ -1,6 +1,6 @@
 package com.demo.controller;
 
-import com.demo.Service.FeginService;
+import com.demo.service.FeginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
