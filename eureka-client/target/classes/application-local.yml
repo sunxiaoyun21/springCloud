@@ -1,0 +1,52 @@
+
+server:
+  port: 8686
+
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml        # mybatis配置文件所在路径
+  type-aliases-package: com.demo.entity    # 所有Entity别名类所在包
+
+spring:
+  application:
+    name: eureka-client # 应用名称
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource            # 当前数据源操作类型
+    driver-class-name: com.mysql.jdbc.Driver             # postgresql驱动包
+    url: jdbc:mysql://localhost:3306/akt_nanningjigou?serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: root
+    #driver-class-name: org.postgresql.Driver             # postgresql驱动包
+    #url: jdbc:postgresql://localhost:5432/clouddb01              # 数据库名称
+    #username: postgres
+    #password: 123456
+    dbcp2:
+      min-idle: 5                                           # 数据库连接池的最小维持连接数
+      initial-size: 5                                       # 初始化连接数
+      max-total: 5                                          # 最大连接数
+      max-wait-millis: 200
+eureka:
+  client:
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: http://localhost:10001/eureka/
+  #instance:
+    #prefer-ip-address: true
+    #hostname: eureka-client
+feign:
+  hystrix:
+    enabled: true
+
+info: # 在eureka中可以点击info链接，显示有值。链接后的内容就是在这里配置的
+  app.name: java3y-microservicecloud
+  company.name: www.java3y.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
+sms:
+  accessKeyId: LTAI4Ff7n5i76MNMW7w3QNgu
+  accessSecret: EC8YR9jVi1WE4rxVigvsev37bzwsZr
+jedis:
+  host: localhost
+  password: 123456
+  max-total: 2000
+  port: 6379
+

@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: eureka-consumer
+
+server:
+  port: 8989
+
+eureka:
+  client:
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: http://localhost:10001/eureka/
