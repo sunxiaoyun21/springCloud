@@ -32,7 +32,7 @@ public class UUIDUtil {
     }
 
     public static void main(String[] args) {
-        //System.out.println(generateUuid());
+       System.out.println(generateUuid());
         System.out.println(generateShortUuid());
     }
 }
