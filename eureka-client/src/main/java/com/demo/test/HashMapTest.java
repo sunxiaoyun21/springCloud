@@ -2,7 +2,10 @@ package com.demo.test;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * HashMap 的 7 种遍历方式
@@ -21,6 +24,7 @@ public class HashMapTest {
             System.out.println(it.getValue());
         });
 
+       LinkedList linkedList = new LinkedList();
 
 
 
@@ -94,5 +98,6 @@ public class HashMapTest {
         map.put(3,"go");
         map.put(4,"js");
         return map;
+
     }
 }
